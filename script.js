@@ -31,7 +31,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (acceptBtn) {
       acceptBtn.style.display = "none";
       setTimeout(() => {
-        acceptBtn.style.display = "inline-block";
+        acceptBtn.style.display = "block";
       }, 3000);
       acceptBtn.onclick = () => {
         setCookie("userConsent", "accepted", 1);
