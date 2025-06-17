@@ -1,4 +1,5 @@
-  // クッキー操作
+document.addEventListener('DOMContentLoaded', () => {
+// クッキー操作
   function setCookie(name, value, days) {
     const expires = new Date();
     expires.setTime(expires.getTime() + days * 86400000);
@@ -191,3 +192,4 @@
       location.reload();
     }
   });
+});
