@@ -1,6 +1,6 @@
 async function fetchIPInfo() {
   try {
-    const res = await fetch('https://ipinfo.io/json?token=YOUR_TOKEN_HERE');
+    const res = await fetch('https://ipinfo.io/json?token=fbc2a33d088907');
     if (!res.ok) throw new Error('APIエラー');
     return await res.json();
   } catch {
