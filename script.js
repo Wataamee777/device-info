@@ -249,3 +249,13 @@ async function init() {
 }
 
 init();
+
+document.getElementById("cookieResetBtn")?.addEventListener("click", (e) => {
+  if (!e.shiftKey) return;
+  testClickCount++;
+  if (testClickCount >= 3) {
+    document.cookie = "userConsent=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+    alert("クッキーを削除しました。ページを再読み込みします。");
+    location.reload();
+  }
+});
