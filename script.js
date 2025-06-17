@@ -1,21 +1,53 @@
-// クッキー操作関数（簡易版）
-function setCookie(name, value, days) {
-  const d = new Date();
-  d.setTime(d.getTime() + (days*24*60*60*1000));
-  const expires = "expires="+ d.toUTCString();
-  document.cookie = name + "=" + value + ";" + expires + ";path=/";
-}
-
-function getCookie(name) {
-  const cname = name + "=";
-  const decodedCookie = decodeURIComponent(document.cookie);
-  const ca = decodedCookie.split(';');
-  for(let c of ca) {
-    while (c.charAt(0) == ' ') c = c.substring(1);
-    if (c.indexOf(cname) == 0) return c.substring(cname.length, c.length);
+ // クッキー操作関数
+  function setCookie(name, value, days) {
+    const expires = new Date();
+    expires.setTime(expires.getTime() + days * 86400000);
+    document.cookie = `${name}=${encodeURIComponent(value)};expires=${expires.toUTCString()};path=/;SameSite=Strict`;
   }
-  return "";
-}
+
+  function getCookie(name) {
+    const value = document.cookie.split('; ').find(row => row.startsWith(name + '='));
+    return value ? decodeURIComponent(value.split('=')[1]) : null;
+  }
+
+  // モーダル表示処理
+  function showTermsModal() {
+    const modal = document.getElementById("termsModal");
+    const acceptBtn = document.getElementById("acceptBtn");
+
+    modal.style.display = "block";
+
+    // 3秒後にボタンを有効化
+    setTimeout(() => {
+      acceptBtn.style.display = "inline-block";
+    }, 3000);
+
+    acceptBtn.addEventListener("click", () => {
+      setCookie("userConsent", "accepted", 1);
+      modal.style.display = "none";
+      init(); // メイン処理
+    });
+  }
+
+  // 初期化処理
+  document.addEventListener("DOMContentLoaded", () => {
+    if (getCookie("userConsent") === "accepted") {
+      init(); // 同意済みなら即スタート
+    } else {
+      showTermsModal(); // 同意求める
+    }
+  });
+
+  // togglePrivacy の動作は任意で定義可能（例）
+  document.getElementById("togglePrivacy")?.addEventListener("click", () => {
+    alert("個人情報保護モードが有効になりました（仮）");
+  });
+
+  // 本来のメイン処理
+  function init() {
+    console.log("init 処理が実行されました");
+    // 必要な処理をここに記述
+  }
 
 // 利用規約モーダルの表示制御
 const termsModal = document.getElementById('termsModal');
