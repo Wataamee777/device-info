@@ -1,53 +1,53 @@
- // クッキー操作関数
-  function setCookie(name, value, days) {
-    const expires = new Date();
-    expires.setTime(expires.getTime() + days * 86400000);
-    document.cookie = `${name}=${encodeURIComponent(value)};expires=${expires.toUTCString()};path=/;SameSite=Strict`;
-  }
+// クッキー操作関数
+function setCookie(name, value, days) {
+  const expires = new Date();
+  expires.setTime(expires.getTime() + days * 86400000);
+  document.cookie = `${name}=${encodeURIComponent(value)};expires=${expires.toUTCString()};path=/;SameSite=Strict`;
+}
 
-  function getCookie(name) {
-    const value = document.cookie.split('; ').find(row => row.startsWith(name + '='));
-    return value ? decodeURIComponent(value.split('=')[1]) : null;
-  }
+function getCookie(name) {
+  const value = document.cookie.split('; ').find(row => row.startsWith(name + '='));
+  return value ? decodeURIComponent(value.split('=')[1]) : null;
+}
 
-  // モーダル表示処理
-  function showTermsModal() {
-    const modal = document.getElementById("termsModal");
-    const acceptBtn = document.getElementById("acceptBtn");
+// モーダル表示処理
+function showTermsModal() {
+  const modal = document.getElementById("termsModal");
+  const acceptBtn = document.getElementById("acceptBtn");
 
-    modal.style.display = "block";
+  modal.style.display = "block";
 
-    // 3秒後にボタンを有効化
-    setTimeout(() => {
-      acceptBtn.style.display = "inline-block";
-    }, 3000);
+  // 3秒後にボタンを有効化
+  setTimeout(() => {
+    acceptBtn.style.display = "inline-block";
+  }, 3000);
 
-    acceptBtn.addEventListener("click", () => {
-      setCookie("userConsent", "accepted", 1);
-      modal.style.display = "none";
-      init(); // メイン処理
-    });
-  }
-
-  // 初期化処理
-  document.addEventListener("DOMContentLoaded", () => {
-    if (getCookie("userConsent") === "accepted") {
-      init(); // 同意済みなら即スタート
-    } else {
-      showTermsModal(); // 同意求める
-    }
+  acceptBtn.addEventListener("click", () => {
+    setCookie("userConsent", "accepted", 1);
+    modal.style.display = "none";
+    init(); // メイン処理
   });
+}
 
-  // togglePrivacy の動作は任意で定義可能（例）
-  document.getElementById("togglePrivacy")?.addEventListener("click", () => {
-    alert("個人情報保護モードが有効になりました（仮）");
-  });
-
-  // 本来のメイン処理
-  function init() {
-    console.log("init 処理が実行されました");
-    // 必要な処理をここに記述
+// 初期化処理
+document.addEventListener("DOMContentLoaded", () => {
+  if (getCookie("userConsent") === "accepted") {
+    init(); // 同意済みなら即スタート
+  } else {
+    showTermsModal(); // 同意求める
   }
+});
+
+// togglePrivacy の動作は任意で定義可能（例）
+document.getElementById("togglePrivacy") ? .addEventListener("click", () => {
+  alert("個人情報保護モードが有効になりました（仮）");
+});
+
+// 本来のメイン処理
+function init() {
+  console.log("init 処理が実行されました");
+  // 必要な処理をここに記述
+}
 
 // 利用規約モーダルの表示制御
 const termsModal = document.getElementById('termsModal');
@@ -168,7 +168,10 @@ function parseUserAgent() {
 async function measurePing(url = "https://www.google.com/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png") {
   try {
     const start = performance.now();
-    await fetch(url, { mode: 'no-cors', cache: 'no-cache' });
+    await fetch(url, {
+      mode: 'no-cors',
+      cache: 'no-cache'
+    });
     const end = performance.now();
     return Math.round(end - start) + ' ms';
   } catch {
@@ -178,7 +181,9 @@ async function measurePing(url = "https://www.google.com/images/branding/googlel
 
 function getLocalIP() {
   return new Promise((resolve) => {
-    const pc = new RTCPeerConnection({iceServers: []});
+    const pc = new RTCPeerConnection({
+      iceServers: []
+    });
     let localIP = '取得不可';
 
     pc.createDataChannel('');
@@ -250,7 +255,7 @@ async function init() {
 
 init();
 
-document.getElementById("cookieResetBtn")?.addEventListener("click", (e) => {
+document.getElementById("cookieResetBtn") ? .addEventListener("click", (e) => {
   if (!e.shiftKey) return;
   testClickCount++;
   if (testClickCount >= 3) {
