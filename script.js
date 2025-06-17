@@ -1,3 +1,71 @@
+// クッキー操作関数（簡易版）
+function setCookie(name, value, days) {
+  const d = new Date();
+  d.setTime(d.getTime() + (days*24*60*60*1000));
+  const expires = "expires="+ d.toUTCString();
+  document.cookie = name + "=" + value + ";" + expires + ";path=/";
+}
+
+function getCookie(name) {
+  const cname = name + "=";
+  const decodedCookie = decodeURIComponent(document.cookie);
+  const ca = decodedCookie.split(';');
+  for(let c of ca) {
+    while (c.charAt(0) == ' ') c = c.substring(1);
+    if (c.indexOf(cname) == 0) return c.substring(cname.length, c.length);
+  }
+  return "";
+}
+
+// 利用規約モーダルの表示制御
+const termsModal = document.getElementById('termsModal');
+const acceptBtn = document.getElementById('acceptBtn');
+const infoBox = document.getElementById('infoBox');
+
+function showInfoBox() {
+  termsModal.style.display = 'none';
+  infoBox.style.display = 'block';
+}
+
+// 画面録画・共有検知（簡易的にMediaStreamを調べる）
+// ※直接的に共有を止めることは不可。ユーザーに注意喚起を促すのみ。
+function checkScreenSharing() {
+  // 画面共有ストリームがあればアラート出す（擬似例）
+  if (navigator.mediaDevices && navigator.mediaDevices.getDisplayMedia) {
+    // 共有中かどうかはここでは検知不可のため警告だけ
+    // 実際は別途ユーザーに伝えるのが良い
+    // console.log("画面共有は検知できません");
+  }
+}
+
+// ページロード時の処理
+window.onload = () => {
+  const agreed = getCookie('termsAccepted');
+  if (agreed === "true") {
+    showInfoBox();
+    initInfoGathering();
+  } else {
+    // 利用規約モーダル表示（OKは3秒後に表示）
+    acceptBtn.style.display = 'none';
+    termsModal.style.display = 'flex';
+
+    setTimeout(() => {
+      acceptBtn.style.display = 'inline-block';
+    }, 3000);
+
+    acceptBtn.onclick = () => {
+      setCookie('termsAccepted', 'true', 1);
+      showInfoBox();
+      initInfoGathering();
+    }
+  }
+}
+
+function initInfoGathering() {
+  checkScreenSharing();
+  // ここにユーザー情報取得の初期化関数をまとめて呼び出す
+  // 例）parseUserAgent(); fetchIPinfo(); measurePing(); getLocation(); など
+}
 const toggleBtn = document.getElementById('togglePrivacy');
 let privacyMode = false;
 
