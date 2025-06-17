@@ -9,7 +9,18 @@
 <body>
 
 <button id="togglePrivacy">個人情報保護: OFF</button>
-
+<!-- 利用規約モーダル -->
+<div id="termsModal" class="modal">
+  <div class="modal-content">
+    <h2>利用規約のご案内</h2>
+    <p>
+      本サイトは画面録画や画面共有の使用を推奨しません。<br />
+      取得される情報はすべてクライアント側でのみ処理され、サーバーには保存されません。<br />
+      ご理解いただけましたら3秒後に表示される「OK」ボタンを押してください。
+    </p>
+    <button id="acceptBtn" style="display:none;">OK</button>
+  </div>
+</div>
 <div id="infoBox">
   <h2>ユーザー環境情報</h2>
   <dl>
