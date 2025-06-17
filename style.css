@@ -32,3 +32,28 @@ dt {
 dd {
   margin: 0 0 1rem 1rem;
 }
+/* モーダル用 */
+.modal {
+  position: fixed;
+  top: 0; left: 0; right:0; bottom: 0;
+  background-color: rgba(0,0,0,0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 10000;
+}
+
+.modal-content {
+  background: white;
+  padding: 2rem;
+  border-radius: 8px;
+  max-width: 400px;
+  text-align: center;
+}
+
+button {
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  margin-top: 1rem;
+  cursor: pointer;
+}
