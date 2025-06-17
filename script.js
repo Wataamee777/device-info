@@ -137,7 +137,7 @@ async function init() {
   const ping = await measurePing();
   document.getElementById('ping').textContent = ping;
 
-  document.getElementById('speed').textContent = '計測停止（負荷軽減のため）';
+  document.getElementById('speed').textContent = '計測できませんでした';
 
   const localIP = await getLocalIP();
   document.getElementById('localIP').textContent = localIP;
