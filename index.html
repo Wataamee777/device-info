@@ -7,18 +7,6 @@
 <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-<button id="cookieResetBtn" style="
-  position: fixed;
-  bottom: 10px;
-  left: 10px;
-  width: 40px;
-  height: 40px;
-  opacity: 0;
-  z-index: 9999;
-  background: transparent;
-  border: none;
-  cursor: pointer;
-">.</button>
 <button id="togglePrivacy">個人情報保護モード</button>
 <!-- 利用規約モーダル -->
 <div id="termsModal" class="modal">
@@ -60,7 +48,7 @@
     <dt>位置情報</dt><dd id="location">未取得</dd>
   </dl>
 </div>
-
+<button id="cookieResetBtn" style="display:none;"></button>
 <script src="script.js"></script>
 </body>
 </html>
