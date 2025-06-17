@@ -47,8 +47,9 @@ function showInfoBox() {
   if (infoBox) infoBox.style.display = 'block';
 }
 
-// 個人情報保護モード切り替え
+// 個人情報保護モード切り替え（初期テキストセット＆イベント登録）
 if (toggleBtn) {
+  toggleBtn.textContent = `個人情報保護: ${privacyMode ? 'ON' : 'OFF'}`;
   toggleBtn.addEventListener("click", () => {
     privacyMode = !privacyMode;
     toggleBtn.textContent = `個人情報保護: ${privacyMode ? 'ON' : 'OFF'}`;
@@ -133,7 +134,7 @@ async function fetchIPinfo() {
         hostname: data.hostname || '不明',
         address: [data.city, data.region, data.country].filter(Boolean).join(', ') || '不明',
         isp: data.org || '不明',
-        vpnProxy: data.proxy ? 'あり' : 'なし'
+        vpnProxy: (data.proxy || data.vpn) ? 'あり' : 'なし'
       };
       for (const [id, text] of Object.entries(idMap)) {
         const el = document.getElementById(id);
