@@ -28,11 +28,6 @@ document.addEventListener('DOMContentLoaded', () => {
     init();
   } else {
     if (modal) modal.style.display = "flex";
-    if (acceptBtn) {
-      acceptBtn.style.display = "none";
-      setTimeout(() => {
-        acceptBtn.style.display = "block";
-      }, 3000);
       acceptBtn.onclick = () => {
         setCookie("userConsent", "accepted", 1);
         if (modal) modal.style.display = "none";
