@@ -28,6 +28,7 @@ document.addEventListener('DOMContentLoaded', () => {
     init();
   } else {
     if (modal) modal.style.display = "flex";
+    if (acceptBtn) {
       acceptBtn.onclick = () => {
         setCookie("userConsent", "accepted", 1);
         if (modal) modal.style.display = "none";
