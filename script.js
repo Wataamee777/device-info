@@ -29,6 +29,10 @@ document.addEventListener('DOMContentLoaded', () => {
   } else {
     if (modal) modal.style.display = "flex";
     if (acceptBtn) {
+      acceptBtn.style.display = "none";Add commentMore actions
+      setTimeout(() => {
+        acceptBtn.style.display = "block";
+      }, 3000);
       acceptBtn.onclick = () => {
         setCookie("userConsent", "accepted", 1);
         if (modal) modal.style.display = "none";
